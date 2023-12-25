@@ -6,12 +6,13 @@ import GenreList from './components/GenreList';
 import NavBar from './components/NavBar';
 import { Platform } from './hooks/usePlatforms';
 import PlatformSelector from './components/PlatformSelector';
-import SorSelector from './components/SorSelector';
+import SortSelector from './components/SortSelector';
 import { useState } from 'react';
 
 export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
+  sortOrder: string;
 }
 
 const App = () => {
@@ -50,7 +51,12 @@ const App = () => {
             }
           />
 
-          <SorSelector />
+          <SortSelector
+            sortOrder={gameQuery.sortOrder}
+            onSelectSortOrder={(sortOrder) =>
+              setGameQuery({ ...gameQuery, sortOrder })
+            }
+          />
         </HStack>
 
         <GameGrid gameQuery={gameQuery} />
